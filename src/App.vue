@@ -1,30 +1,36 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div>
+    <main-header @on-click-fold="onClickFold"></main-header>
+    <div class="main-box">
+      <main-menu :is-collapse="isCollapse"></main-menu>
+      <router-view />
+    </div>
   </div>
-  <router-view />
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import MainHeader from "@/components/MainHeader";
+import MainMenu from "@/components/MainMenu";
+export default {
+  components: { MainMenu, MainHeader },
+  data() {
+    return {
+      isCollapse: false,
+    };
+  },
+  methods: {
+    onClickFold(v) {
+      console.log("--->", v);
+      this.isCollapse = v;
+    },
 
-#nav {
-  padding: 30px;
+  },
+};
+</script>
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+<style lang="scss" scoped>
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.main-box {
+  display: flex;
 }
 </style>
