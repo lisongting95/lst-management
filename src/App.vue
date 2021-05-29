@@ -23,13 +23,11 @@ export default {
       console.log("--->", v);
       this.isCollapse = v;
     },
-
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
 .main-box {
   display: flex;
 }

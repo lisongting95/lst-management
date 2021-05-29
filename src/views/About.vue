@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>{{stateText}}</h1>
+    <h1>{{ stateText }}</h1>
   </div>
 </template>
 <script>
