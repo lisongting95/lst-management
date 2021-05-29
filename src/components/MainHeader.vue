@@ -1,18 +1,10 @@
 <template>
   <div class="header-box">
     <div class="title-box">
-      <i
-        v-if="isCollapse"
-        @click="onClickFold"
-        class="el-icon-s-fold"
-        style="font-size: 24px"
-      ></i>
-      <i
-        v-if="!isCollapse"
-        @click="onClickFold"
-        class="el-icon-s-unfold"
-        style="font-size: 24px"
-      ></i>
+      <div @click="onClickFold">
+        <i v-if="collapse" class="el-icon-s-fold"></i>
+        <i v-if="!collapse" class="el-icon-s-unfold"></i>
+      </div>
       <div class="title">system name ~</div>
     </div>
 
@@ -28,16 +20,15 @@
 <script>
 export default {
   name: "MainHeader",
-  emits: ["onClickFold"],
+  props: {
+    collapse: Boolean,
+  },
   data() {
-    return {
-      isCollapse: false,
-    };
+    return {};
   },
   methods: {
     onClickFold() {
-      this.isCollapse = !this.isCollapse;
-      this.$emit("onClickFold", this.isCollapse);
+      this.$emit("update:collapse", !this.collapse);
     },
   },
 };
@@ -56,8 +47,10 @@ export default {
   .title-box {
     display: flex;
     align-items: center;
+    font-size: 24px;
     .title {
       margin-left: 20px;
+      font-size: 20px;
     }
   }
   .avatar-box {

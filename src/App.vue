@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main-header @on-click-fold="onClickFold"></main-header>
+    <main-header v-model:collapse="isCollapse"></main-header>
     <div class="main-box">
       <main-menu :is-collapse="isCollapse"></main-menu>
       <router-view />
@@ -18,12 +18,7 @@ export default {
       isCollapse: false,
     };
   },
-  methods: {
-    onClickFold(v) {
-      console.log("--->", v);
-      this.isCollapse = v;
-    },
-  },
+  methods: {},
 };
 </script>
 
