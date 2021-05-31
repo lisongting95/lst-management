@@ -10,7 +10,7 @@
 
 <script>
 import MainHeader from "@/components/MainHeader";
-import MainMenu from "@/components/MainMenu";
+import MainMenu from "@/components/MainMenu/MainMenu";
 export default {
   components: { MainMenu, MainHeader },
   data() {

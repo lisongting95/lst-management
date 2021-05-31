@@ -5,14 +5,27 @@
 </template>
 <script>
 // import model from "@/api/model";
+import { onMounted } from 'vue'
 export default {
-  async mounted() {
-    let res = await this.$model.login({
-      mobile: "18669010827",
-      password: "123456",
-      type: "password",
+  setup(){
+    onMounted(() => {
+      console.log('mounted!')
     });
-    console.log("login res --->", res);
+  },
+  // async mounted() {
+  //   let res = await this.$model.login({
+  //     mobile: "18669010827",
+  //     password: "123456",
+  //     type: "password",
+  //   });
+  //   console.log("login res --->", res);
+  //   this.token = res;
+  //   console.log("token --->", this.token);
+  // },
+  data() {
+    return {
+      token: null,
+    };
   },
   computed: {
     stateText() {
