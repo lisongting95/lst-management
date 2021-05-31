@@ -16,19 +16,19 @@ const metaMenu = [
           {
             index: 111,
             name: "首页",
-            path: "/",
+            routeName: "Home",
             isShow: false,
           },
           {
             index: 112,
             name: "关于",
-            path: "/about",
+            routeName: "About",
             isShow: false,
           },
           {
             index: 113,
             name: "嵌套",
-            path: "/nested",
+            routeName: "Nested",
             isShow: false,
           },
         ],
@@ -41,13 +41,13 @@ const metaMenu = [
           {
             index: 121,
             name: "121",
-            path: "/121",
+            routeName: "121",
             isShow: false,
           },
           {
             index: 122,
             name: "122",
-            path: "/122",
+            routeName: "122",
             isShow: false,
           },
         ],
@@ -72,13 +72,13 @@ const metaMenu = [
           {
             index: 211,
             name: "211",
-            path: "/211",
+            routeName: "211",
             isShow: false,
           },
           {
             index: 212,
             name: "212",
-            path: "/212",
+            routeName: "212",
             isShow: false,
           },
         ],
@@ -91,13 +91,13 @@ const metaMenu = [
           {
             index: 221,
             name: "221",
-            path: "/221",
+            routeName: "221",
             isShow: false,
           },
           {
             index: 222,
             name: "222",
-            path: "/222",
+            routeName: "222",
             isShow: false,
           },
         ],
@@ -116,7 +116,7 @@ const metaMenu = [
       {
         index: 31,
         name: "用户详情",
-        path: "/user",
+        routeName: "User",
         isShow: false,
       },
     ],
@@ -127,7 +127,7 @@ const metaMenu = [
     name: "顶级目录4",
     isShow: false,
     icon: "el-icon-s-platform",
-    path: "/4",
+    routeName: "4",
   },
 ];
 

@@ -22,7 +22,7 @@
               >
                 <el-menu-item
                   v-if="metaItem.isShow"
-                  :index="metaItem.path"
+                  :index="metaItem.name"
                   @click="goToPage(metaItem)"
                 >
                   {{ metaItem.name }}
@@ -32,7 +32,7 @@
             <!--次级没有子目录时-->
             <el-menu-item
               v-if="subItem.isShow && !subItem.children"
-              :index="subItem.path"
+              :index="subItem.name"
               @click="goToPage(subItem)"
             >
               {{ subItem.name }}
@@ -42,7 +42,7 @@
         <!--顶级没有子目录时-->
         <el-menu-item
           v-if="item.isShow && !item.children"
-          :index="item.path"
+          :index="item.name"
           @click="goToPage(item)"
         >
           <template #title>
@@ -76,19 +76,17 @@ export default {
   },
   methods: {
     init() {
-      let m = getMenu("superManager");
-      console.log("m -->", m);
-      console.log("this.menuList -->", this.menuList);
-      this.menuList = m;
-      console.log("this.menuList -->", this.menuList);
+      this.menuList = getMenu("superManager");
     },
     goToPage(item) {
-      console.log("menuItem -->", item);
-      if (item.path === "/user") {
-        this.$router.push({ path: "/user/6" });
+      if (!this.$router.hasRoute(item.routeName)) {
         return;
       }
-      this.$router.push({ path: item.path });
+      if (item.routeName === "User") {
+        this.$router.push({ name: "User", params: { id: 6 } });
+        return;
+      }
+      this.$router.push({ name: item.routeName });
     },
   },
 };
