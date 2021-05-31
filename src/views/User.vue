@@ -6,7 +6,7 @@
 export default {
   name: "User",
   mounted() {
-    console.log("router params -->", this.$route.params)
+    console.log("router params -->", this.$route.params);
   },
 };
 </script>

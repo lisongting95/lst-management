@@ -1,5 +1,5 @@
 <template>
-  <div>I am nested page!</div>
+  <div style="margin-top: 20px">I am nested page!</div>
 </template>
 
 <script>
