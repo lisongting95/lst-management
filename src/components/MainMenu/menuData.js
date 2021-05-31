@@ -25,6 +25,12 @@ const metaMenu = [
             path: "/about",
             isShow: false,
           },
+          {
+            index: 113,
+            name: "嵌套",
+            path: "/nested",
+            isShow: false,
+          },
         ],
       },
       {
@@ -102,15 +108,15 @@ const metaMenu = [
   //顶级目录
   {
     index: 3,
-    name: "顶级目录3",
+    name: "用户",
     isShow: false,
     icon: "el-icon-user-solid",
     //次级目录
     children: [
       {
         index: 31,
-        name: "次级目录31",
-        path: "/31",
+        name: "用户详情",
+        path: "/user",
         isShow: false,
       },
     ],
@@ -127,10 +133,10 @@ const metaMenu = [
 
 const roles = {
   all: {
-    menuSet: [111, 112, 121, 122, 211, 212, 221, 222, 31, 4],
+    menuSet: [111, 112, 113, 121, 122, 211, 212, 221, 222, 31, 4],
   },
   superManager: {
-    menuSet: [111, 112, 121, 122, 211, 212, 221, 222, 31, 4],
+    menuSet: [111, 112, 113, 121, 122, 211, 212, 221, 222, 31, 4],
   },
   highLevelManager: {
     menuSet: [111, 112, 121, 122, 211],
