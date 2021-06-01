@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import store from "../store/index";
+import { beforeEach } from "@/router/guard";
 
 const routes = [
   {
@@ -40,18 +40,6 @@ const router = createRouter({
   routes,
 });
 
-// eslint-disable-next-line
-router.beforeEach((to, from) => {
-  console.log("router -->", to);
-  console.log("store -->", store.getters.getToken);
-  if (to.name === "Login") {
-    return true;
-  }
-  if (!store.getters.getToken) {
-    return { name: "Login" };
-  }
-  // 返回 false 以取消导航
-  // return false;
-});
+router.beforeEach(beforeEach);
 
 export default router;
