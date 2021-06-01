@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <div>welcome to 花伍鲜花交易系统 ~</div>
+    <div>welcome to 花伍鲜花交易系统 ~ {{ userName }}</div>
     <div style="display: flex; align-items: center; margin-top: 10px">
       <div style="margin-right: 10px">颜色</div>
       <el-color-picker v-model="color1"></el-color-picker>
@@ -20,6 +20,12 @@ export default {
       color1: "#2a7e35",
       homeTest: false,
     };
+  },
+  computed: {
+    userName() {
+      // 模块state
+      return this.$store.state.user.userName;
+    },
   },
 };
 </script>

@@ -4,12 +4,12 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import("../views/Home.vue"),
+    component: () => import("../views/Home/Home.vue"),
   },
   {
     path: "/user/:id",
     name: "User",
-    component: () => import("../views/User.vue"),
+    component: () => import("../views/User/User.vue"),
   },
   {
     path: "/about",
@@ -23,7 +23,7 @@ const routes = [
       {
         path: "/nested",
         name: "Nested",
-        component: () => import("../views/Nested"),
+        component: () => import("../views/Nested/Nested"),
       },
     ],
   },
@@ -32,6 +32,14 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+});
+
+// eslint-disable-next-line
+router.beforeEach((to, from) => {
+  console.log("router -->", to);
+
+  // 返回 false 以取消导航
+  // return false;
 });
 
 export default router;

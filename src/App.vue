@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import MainHeader from "@/components/MainHeader";
+import MainHeader from "@/components/MainHeader/MainHeader";
 import MainMenu from "@/components/MainMenu/MainMenu";
 export default {
   components: { MainMenu, MainHeader },

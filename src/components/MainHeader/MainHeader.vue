@@ -12,7 +12,7 @@
       <el-avatar
         src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
       ></el-avatar>
-      <div class="name">李松庭</div>
+      <div class="name">{{ userName }}</div>
     </div>
   </div>
 </template>
@@ -29,6 +29,12 @@ export default {
   methods: {
     onClickFold() {
       this.$emit("update:collapse", !this.collapse);
+    },
+  },
+  computed: {
+    userName() {
+      //使用命名空间
+      return this.$store.getters["user/getUserInfo"].name;
     },
   },
 };
