@@ -1,10 +1,16 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import store from "../store/index";
 
 const routes = [
   {
     path: "/",
     name: "Home",
     component: () => import("../views/Home/Home.vue"),
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import("../views/Login/Login"),
   },
   {
     path: "/user/:id",
@@ -37,7 +43,13 @@ const router = createRouter({
 // eslint-disable-next-line
 router.beforeEach((to, from) => {
   console.log("router -->", to);
-
+  console.log("store -->", store.getters.getToken);
+  if (to.name === "Login") {
+    return true;
+  }
+  if (!store.getters.getToken) {
+    return { name: "Login" };
+  }
   // 返回 false 以取消导航
   // return false;
 });

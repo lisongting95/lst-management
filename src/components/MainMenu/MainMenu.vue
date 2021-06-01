@@ -82,6 +82,11 @@ export default {
       if (!this.$router.hasRoute(item.routeName)) {
         return;
       }
+      if (item.routeName === "Login") {
+        this.$store.commit("setToken", false);
+        this.$router.replace({ name: "Login" });
+        return;
+      }
       if (item.routeName === "User") {
         this.$router.push({ name: "User", params: { id: 6 } });
         return;

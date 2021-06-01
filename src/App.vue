@@ -1,8 +1,13 @@
 <template>
   <div>
-    <main-header v-model:collapse="isCollapse"></main-header>
-    <div class="main-box">
-      <main-menu :is-collapse="isCollapse"></main-menu>
+    <div v-if="isLogin">
+      <main-header v-model:collapse="isCollapse"></main-header>
+      <div class="main-box">
+        <main-menu :is-collapse="isCollapse"></main-menu>
+        <router-view />
+      </div>
+    </div>
+    <div v-else>
       <router-view />
     </div>
   </div>
@@ -19,6 +24,11 @@ export default {
     };
   },
   methods: {},
+  computed: {
+    isLogin() {
+      return this.$store.getters.getToken;
+    },
+  },
 };
 </script>
 

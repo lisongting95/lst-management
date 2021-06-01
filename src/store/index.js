@@ -5,9 +5,19 @@ export default createStore({
   state() {
     return {
       stateText: "hello I'm stateText~",
+      token: null,
     };
   },
-  mutations: {},
+  getters: {
+    getToken: (state) => {
+      return state.token;
+    },
+  },
+  mutations: {
+    setToken: (state, params) => {
+      state.token = params;
+    },
+  },
   actions: {},
   modules: {
     user,
