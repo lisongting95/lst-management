@@ -35,7 +35,7 @@ const metaMenu = [
       },
       {
         index: 12,
-        name: "次级目录12",
+        name: "Er级目录",
         isShow: false,
         children: [
           {
@@ -58,14 +58,14 @@ const metaMenu = [
   //顶级目录
   {
     index: 2,
-    name: "顶级目录2",
+    name: "顶级目录",
     isShow: false,
     icon: "el-icon-s-tools",
     //次级目录
     children: [
       {
         index: 21,
-        name: "次级目录21",
+        name: "2级目录",
         isShow: false,
         //元目录
         children: [
@@ -85,7 +85,7 @@ const metaMenu = [
       },
       {
         index: 22,
-        name: "次级目录22",
+        name: "次级目录",
         isShow: false,
         children: [
           {
@@ -146,26 +146,93 @@ const roles = {
   },
 };
 
-export function getMenu(role) {
+export function getMenu(role, searchKey) {
   let myMenuSet = roles[role].menuSet;
   let myMenu = metaMenu;
+  console.log("My--->", myMenu);
   myMenuSet.forEach((data) => {
     let s_data = data.toString();
-    if (s_data.length > 0) {
-      let topIndex = Number(s_data[0]) - 1;
-      myMenu[topIndex].isShow = true;
-    }
-    if (s_data.length > 1) {
-      let topIndex = Number(s_data[0]) - 1;
-      let secIndex = Number(s_data[1]) - 1;
-      myMenu[topIndex].children[secIndex].isShow = true;
-    }
-    if (s_data.length > 2) {
+    if (s_data.length === 3) {
       let topIndex = Number(s_data[0]) - 1;
       let secIndex = Number(s_data[1]) - 1;
       let thrIndex = Number(s_data[2]) - 1;
+      if (searchKey) {
+        if (
+          myMenu[topIndex].children[secIndex].children[thrIndex].name.includes(
+            searchKey
+          )
+        ) {
+          myMenu[topIndex].isShow = true;
+          myMenu[topIndex].children[secIndex].isShow = true;
+          myMenu[topIndex].children[secIndex].children[thrIndex].isShow = true;
+        } else {
+          myMenu[topIndex].children[secIndex].children[thrIndex].isShow = false;
+        }
+        return true;
+      }
+      myMenu[topIndex].isShow = true;
+      myMenu[topIndex].children[secIndex].isShow = true;
       myMenu[topIndex].children[secIndex].children[thrIndex].isShow = true;
+      return true;
+    }
+    if (s_data.length === 2) {
+      let topIndex = Number(s_data[0]) - 1;
+      let secIndex = Number(s_data[1]) - 1;
+
+      if (searchKey) {
+        if (myMenu[topIndex].children[secIndex].name.includes(searchKey)) {
+          myMenu[topIndex].isShow = true;
+          myMenu[topIndex].children[secIndex].isShow = true;
+        } else {
+          myMenu[topIndex].children[secIndex].isShow = false;
+        }
+        return true;
+      }
+
+      myMenu[topIndex].isShow = true;
+      myMenu[topIndex].children[secIndex].isShow = true;
+      return true;
+    }
+    if (s_data.length === 1) {
+      let topIndex = Number(s_data[0]) - 1;
+      if (searchKey) {
+        if (myMenu[topIndex].name.includes(searchKey)) {
+          myMenu[topIndex].isShow = true;
+        } else {
+          myMenu[topIndex].isShow = false;
+        }
+        return true;
+      }
+      myMenu[topIndex].isShow = true;
     }
   });
+
+  myMenu.forEach((data) => {
+    if (data.children) {
+      data.children.forEach((data2) => {
+        if (data2.children) {
+          if (!hasShownChildren(data2)) {
+            data2.isShow = false;
+          }
+        }
+      });
+      if (!hasShownChildren(data)) {
+        data.isShow = false;
+      }
+    }
+  });
+
   return myMenu;
 }
+
+const hasShownChildren = (item) => {
+  let children = item.children;
+  for (let i = 0; i < children.length; i++) {
+    if (children[i].isShow) {
+      return true;
+    }
+    if (i === children.length - 1) {
+      return false;
+    }
+  }
+};

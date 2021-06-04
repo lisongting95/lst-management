@@ -4,7 +4,9 @@ import model from "@/api/model";
 const state = () => ({
   userInfo: { name: "LiSongTing" },
   userName: "李松庭",
-  token: null,
+  token: window.localStorage.getItem("token")
+    ? JSON.parse(window.localStorage.getItem("token"))
+    : null,
 });
 
 // getters
@@ -15,7 +17,7 @@ const getters = {
   },
 
   getToken: (state) => {
-    return state.token
+    return state.token;
   },
 };
 
@@ -24,18 +26,21 @@ const actions = {
   async login({ commit }, payload) {
     let loginRes = await model.login(payload);
     console.log("login res -->", loginRes);
-    commit("setToken", loginRes)
+    commit("setToken", loginRes);
   },
 };
 
 // mutations
 const mutations = {
-
   //保存token
   setToken(state, payload) {
     state.token = payload;
+    if (payload) {
+      window.localStorage.setItem("token", JSON.stringify(payload));
+    } else {
+      window.localStorage.removeItem("token");
+    }
   },
-
 };
 
 export default {

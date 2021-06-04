@@ -1,11 +1,23 @@
 <template>
   <div class="menu-box">
-    <el-menu class="el-menu-vertical-demo" :collapse="isCollapse">
+    <div class="search-box" v-if="!isCollapse">
+      <el-input placeholder="搜索" v-model="searchKey" @change="onSearch">
+        <template #suffix>
+          <i class="el-input__icon el-icon-search" @click="onSearch"></i>
+        </template>
+      </el-input>
+    </div>
+
+    <el-menu
+      class="el-menu-vertical-demo"
+      :collapse="isCollapse"
+      :default-active="currentPage"
+    >
       <template v-for="(item, index) in menuList" :key="index">
         <el-submenu v-if="item.isShow && item.children" :index="item.name">
           <template #title>
             <i :class="item.icon"></i>
-            <span class="top-menu">{{ item.name }}</span>
+            <span :style="{paddingRight:(176-item.name.length*14)+'px'}">{{ item.name }}</span>
           </template>
           <template
             v-for="(subItem, subIndex) in item.children"
@@ -47,7 +59,7 @@
         >
           <template #title>
             <i :class="item.icon"></i>
-            <span class="top-menu">{{ item.name }}</span>
+            <span :style="{paddingRight:(176-item.name.length*14)+'px'}">{{ item.name }}</span>
           </template>
         </el-menu-item>
       </template>
@@ -72,6 +84,7 @@ export default {
   data() {
     return {
       menuList: [],
+      searchKey: "",
     };
   },
   methods: {
@@ -93,6 +106,18 @@ export default {
       }
       this.$router.push({ name: item.routeName });
     },
+    onSearch() {
+      console.log("onSearch --", this.searchKey);
+      // console.log("-->", getMenu("superManager", this.searchKey));
+
+      this.menuList = [].concat(getMenu("superManager", this.searchKey));
+    },
+  },
+  computed: {
+    currentPage() {
+      console.log("current page --->", this.$route);
+      return this.$route.meta.title;
+    },
   },
 };
 </script>
@@ -100,7 +125,11 @@ export default {
 <style lang="scss" scoped>
 .menu-box {
   .top-menu {
-    padding-right: 80px;
+    padding-right: 120px;
+  }
+  .search-box {
+    border-right: solid 1px #e6e6e6;
+    padding: 10px;
   }
 }
 </style>
