@@ -3,18 +3,20 @@
     <div class="content">
       <div class="title">花伍鲜花交易系统</div>
       <div class="login-box">
-        <div class="input-box">
-          <div class="tip">账号：</div>
-          <el-input placeholder="请输入账号" v-model="account"></el-input>
-        </div>
-        <div class="input-box">
-          <div class="tip">密码：</div>
-          <el-input
-            placeholder="请输入密码"
-            v-model="password"
-            show-password
-          ></el-input>
-        </div>
+        <el-form
+          ref="form"
+          :model="form"
+          :rules="rules"
+          label-width="50px"
+          label-position="left"
+        >
+          <el-form-item label="账号:" prop="mobile">
+            <el-input v-model="form.mobile"></el-input>
+          </el-form-item>
+          <el-form-item label="密码:" prop="password">
+            <el-input v-model="form.password" type="password"></el-input>
+          </el-form-item>
+        </el-form>
         <div class="btn-box">
           <el-button @click="onClickLogin" type="primary" style="width: 100%"
             >登录</el-button
@@ -29,15 +31,54 @@
 export default {
   name: "Login",
   data() {
+    let validateMobile = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入账号"));
+      } else {
+        callback();
+      }
+    };
+    let validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+      } else {
+        callback();
+      }
+    };
     return {
-      account: "",
-      password: "",
+      form: {
+        mobile: "",
+        password: "",
+        type: "password",
+      },
+      rules: {
+        mobile: [{ validator: validateMobile, trigger: "blur" }],
+        password: [{ validator: validatePass, trigger: "blur" }],
+      },
     };
   },
   methods: {
     onClickLogin() {
-      this.$store.commit("setToken", true);
-      this.$router.push({ name: "Home" });
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+          this.$store.dispatch("user/login", this.form);
+        } else {
+          console.log("xxxxxx");
+          return false;
+        }
+      });
+    },
+  },
+  computed: {
+    token() {
+      return this.$store.getters["user/getToken"];
+    },
+  },
+  watch: {
+    token(value) {
+      if (value) {
+        this.$router.push({ name: "Home" });
+      }
     },
   },
 };
@@ -67,15 +108,6 @@ export default {
       padding: 30px 30px 20px 30px;
       margin-top: 10px;
       width: 300px;
-      .input-box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-bottom: 10px;
-        .tip {
-          width: 80px;
-        }
-      }
       .btn-box {
         margin-top: 10px;
         display: flex;

@@ -1,7 +1,10 @@
+import model from "@/api/model";
+
 /* eslint-disable */
 const state = () => ({
   userInfo: { name: "LiSongTing" },
   userName: "李松庭",
+  token: null,
 });
 
 // getters
@@ -10,26 +13,29 @@ const getters = {
   getUserInfo: (state, getters, rootState, rootGetters) => {
     return state.userInfo;
   },
+
+  getToken: (state) => {
+    return state.token
+  },
 };
 
 // actions
 const actions = {
-  async getAllProducts({ commit }) {
-    const products = [{ pro: 1 }];
-    commit("setProducts", products);
+  async login({ commit }, payload) {
+    let loginRes = await model.login(payload);
+    console.log("login res -->", loginRes);
+    commit("setToken", loginRes)
   },
 };
 
 // mutations
 const mutations = {
-  setProducts(state, products) {
-    state.all = products;
+
+  //保存token
+  setToken(state, payload) {
+    state.token = payload;
   },
 
-  decrementProductInventory(state, { id }) {
-    const product = state.all.find((product) => product.id === id);
-    product.inventory--;
-  },
 };
 
 export default {

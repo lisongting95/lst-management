@@ -5,7 +5,7 @@
         <i v-if="collapse" class="el-icon-s-fold"></i>
         <i v-if="!collapse" class="el-icon-s-unfold"></i>
       </div>
-      <div class="title">system name ~</div>
+      <div class="title">花伍鲜花交易系统</div>
     </div>
 
     <div class="avatar-box">

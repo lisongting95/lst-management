@@ -26,13 +26,14 @@ export default {
   methods: {},
   computed: {
     isLogin() {
-      return this.$store.getters.getToken;
+      return this.$store.getters["user/getToken"];
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import "libs/css/common";
 .main-box {
   display: flex;
 }

@@ -1,5 +1,5 @@
 import http from "@/http/http";
-import md5Libs from "@/libs/md5";
+import md5Libs from "@/libs/md5/md5";
 
 export function login(params) {
   let appid = "hua5_text";
