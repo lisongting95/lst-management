@@ -9,6 +9,7 @@
     </div>
 
     <el-menu
+      ref="mainMenu"
       class="el-menu-vertical-demo"
       :collapse="isCollapse"
       :default-active="currentPage"
@@ -17,7 +18,10 @@
         <el-submenu v-if="item.isShow && item.children" :index="item.name">
           <template #title>
             <i :class="item.icon"></i>
-            <span :style="{paddingRight:(176-item.name.length*14)+'px'}">{{ item.name }}</span>
+            <span
+              :style="{ paddingRight: 176 - item.name.length * 14 + 'px' }"
+              >{{ item.name }}</span
+            >
           </template>
           <template
             v-for="(subItem, subIndex) in item.children"
@@ -59,7 +63,10 @@
         >
           <template #title>
             <i :class="item.icon"></i>
-            <span :style="{paddingRight:(176-item.name.length*14)+'px'}">{{ item.name }}</span>
+            <span
+              :style="{ paddingRight: 176 - item.name.length * 14 + 'px' }"
+              >{{ item.name }}</span
+            >
           </template>
         </el-menu-item>
       </template>
@@ -68,7 +75,7 @@
 </template>
 
 <script>
-import { getMenu } from "@/components/MainMenu/menuData";
+import { getMenu, getSubmenuIndexes } from "@/components/MainMenu/menuData";
 
 export default {
   name: "MainMenu",
@@ -107,10 +114,14 @@ export default {
       this.$router.push({ name: item.routeName });
     },
     onSearch() {
-      console.log("onSearch --", this.searchKey);
-      // console.log("-->", getMenu("superManager", this.searchKey));
-
       this.menuList = [].concat(getMenu("superManager", this.searchKey));
+      console.log("indexes -->",getSubmenuIndexes())
+      if(this.searchKey){
+        let submenus = getSubmenuIndexes()
+        submenus.forEach((name)=>{
+          this.$refs.mainMenu.open(name)
+        })
+      }
     },
   },
   computed: {

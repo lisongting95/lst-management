@@ -236,3 +236,20 @@ const hasShownChildren = (item) => {
     }
   }
 };
+
+export function getSubmenuIndexes() {
+  let temp = [];
+  let myMenu = metaMenu;
+  myMenu.forEach((data) => {
+    if (data.children) {
+      data.children.forEach((data2) => {
+        if (data2.children) {
+          if (hasShownChildren(data2)) {
+            temp.push(data2.name);
+          }
+        }
+      });
+    }
+  });
+  return temp;
+}
