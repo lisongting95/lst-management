@@ -18,9 +18,9 @@
           </el-form-item>
         </el-form>
         <div class="btn-box">
-          <el-button @click="onClickLogin" type="primary" style="width: 100%"
-            >登录</el-button
-          >
+          <el-button @click="onClickLogin" type="primary" style="width: 100%">
+            登录
+          </el-button>
         </div>
       </div>
     </div>

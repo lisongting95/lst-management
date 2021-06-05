@@ -9,10 +9,20 @@
     </div>
 
     <div class="avatar-box">
-      <el-avatar
-        src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-      ></el-avatar>
-      <div class="name">{{ userName }}</div>
+      <div class="name">你好，{{ userName }}</div>
+      <el-dropdown @command="onClickMenu">
+        <div>
+          <el-avatar
+            src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+          ></el-avatar>
+        </div>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item command="setting">设置</el-dropdown-item>
+            <el-dropdown-item command="logout">注销</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
     </div>
   </div>
 </template>
@@ -30,11 +40,18 @@ export default {
     onClickFold() {
       this.$emit("update:collapse", !this.collapse);
     },
+    onClickMenu(command) {
+      if (command === "logout") {
+        this.$store.commit("user/setToken", null);
+        let routeHistory=history.length-1;
+        this.$router.go(-routeHistory);
+      }
+    },
   },
   computed: {
     userName() {
       //使用命名空间
-      return this.$store.getters["user/getUserInfo"].name;
+      return this.$store.state.user.userName;
     },
   },
 };
@@ -59,13 +76,14 @@ export default {
       font-size: 20px;
     }
   }
-  .avatar-box {
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    .name {
-      margin-left: 10px;
-    }
-  }
+}
+.avatar-box {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+.name {
+  margin-right: 20px;
+  color: #ffffff;
 }
 </style>
