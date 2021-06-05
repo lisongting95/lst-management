@@ -1,10 +1,5 @@
 <template>
-  <div class="about">
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ name: 'Home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ name: 'About' }">关于</el-breadcrumb-item>
-    </el-breadcrumb>
-
+  <div>
     <h1>{{ stateText }}</h1>
     <div @click="change">{{ token }}</div>
     <div style="margin-top: 20px">{{ computedTest }}</div>
@@ -61,8 +56,4 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-.about {
-  padding: 20px;
-}
-</style>
+<style lang="scss" scoped></style>

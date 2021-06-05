@@ -115,19 +115,23 @@ export default {
     },
     onSearch() {
       this.menuList = [].concat(getMenu("superManager", this.searchKey));
-      console.log("indexes -->",getSubmenuIndexes())
-      if(this.searchKey){
-        let submenus = getSubmenuIndexes()
-        submenus.forEach((name)=>{
-          this.$refs.mainMenu.open(name)
-        })
+      console.log("indexes -->", getSubmenuIndexes());
+      if (this.searchKey) {
+        let submenus = getSubmenuIndexes();
+        submenus.forEach((name) => {
+          this.$refs.mainMenu.open(name);
+        });
       }
     },
   },
   computed: {
     currentPage() {
       console.log("current page --->", this.$route);
-      return this.$route.meta.title;
+      if (this.$route.meta.location) {
+        return this.$route.meta.location[this.$route.meta.location.length - 1]
+          .title;
+      }
+      return "";
     },
   },
 };

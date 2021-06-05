@@ -6,23 +6,21 @@ const routes = [
     path: "/",
     name: "Home",
     meta: {
-      title: "首页",
+      location: [{ name: "Home", title: "首页" }],
     },
     component: () => import("../views/Home/Home.vue"),
   },
   {
     path: "/login",
     name: "Login",
-    meta: {
-      title: "登录",
-    },
+    meta: {},
     component: () => import("../views/Login/Login"),
   },
   {
     path: "/user/:id",
     name: "User",
     meta: {
-      title: "用户详情",
+      location: [{ name: "User", title: "用户详情" }],
     },
     component: () => import("../views/User/User.vue"),
   },
@@ -30,7 +28,10 @@ const routes = [
     path: "/about",
     name: "About",
     meta: {
-      title: "关于",
+      location: [
+        { name: "Home", title: "首页" },
+        { name: "About", title: "关于" },
+      ],
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -42,7 +43,11 @@ const routes = [
         path: "/nested",
         name: "Nested",
         meta: {
-          title: "嵌套",
+          location: [
+            { name: "Home", title: "首页" },
+            { name: "About", title: "关于" },
+            { name: "Nested", title: "嵌套" },
+          ],
         },
         component: () => import("../views/Nested/Nested"),
       },
