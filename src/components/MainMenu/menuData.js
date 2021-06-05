@@ -149,7 +149,6 @@ const roles = {
 export function getMenu(role, searchKey) {
   let myMenuSet = roles[role].menuSet;
   let myMenu = metaMenu;
-  console.log("My--->", myMenu);
   myMenuSet.forEach((data) => {
     let s_data = data.toString();
     if (s_data.length === 3) {

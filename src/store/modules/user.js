@@ -25,7 +25,6 @@ const getters = {
 const actions = {
   async login({ commit }, payload) {
     let loginRes = await model.login(payload);
-    console.log("login res -->", loginRes);
     commit("setToken", loginRes);
   },
 };

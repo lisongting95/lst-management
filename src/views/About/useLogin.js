@@ -11,7 +11,6 @@ export default function useLogin(user) {
     });
   };
   onMounted(getLoginToken);
-  console.log("token -->", token);
 
   // 在用户 prop 的响应式引用上设置一个侦听器, 这里prop里没有user, 会有个warning
   watch(user, getLoginToken);

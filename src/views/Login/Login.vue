@@ -22,6 +22,9 @@
             登录
           </el-button>
         </div>
+        <div class="flex flex-row-right mt20 mr10">
+          <el-checkbox v-model="remember">记住密码</el-checkbox>
+        </div>
       </div>
     </div>
   </div>
@@ -46,9 +49,10 @@ export default {
       }
     };
     return {
+      remember: window.localStorage.getItem("remember") === "true",
       form: {
-        mobile: "",
-        password: "",
+        mobile: window.localStorage.getItem("mobile"),
+        password: window.localStorage.getItem("password"),
         type: "password",
       },
       rules: {
@@ -62,6 +66,15 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           this.$store.dispatch("user/login", this.form);
+          if (this.remember) {
+            window.localStorage.setItem("remember", "true");
+            window.localStorage.setItem("mobile", this.form.mobile);
+            window.localStorage.setItem("password", this.form.password);
+          } else {
+            window.localStorage.removeItem("remember");
+            window.localStorage.removeItem("mobile");
+            window.localStorage.removeItem("password");
+          }
         } else {
           console.log("xxxxxx");
           return false;

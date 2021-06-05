@@ -43,8 +43,7 @@ export default {
     onClickMenu(command) {
       if (command === "logout") {
         this.$store.commit("user/setToken", null);
-        let routeHistory=history.length-1;
-        this.$router.go(-routeHistory);
+        this.$router.push({ name: "Login" });
       }
     },
   },
